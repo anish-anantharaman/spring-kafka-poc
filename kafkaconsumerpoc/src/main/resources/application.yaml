@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: kafkaconsumerpoc
+
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    consumer:
+      group-id: foods-service
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      concurrency: 3
+      ack-mode: manual
+
+app:
+  kafka:
+    topics:
+      foods: foods
+
+server:
+  port: 8081

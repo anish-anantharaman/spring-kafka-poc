@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: kafkaproducerpoc
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all # Producer waits for all ISR replicas to acknowledge. Without acks=all, messages can be lost during broker failures.
+      retries: 3 # Retries handle most of these automatically.
+      enable-idempotence: true # Prevents duplicate messages during retries.
+      properties:
+        max-request-size: 5242880  # Max request size capped at ~5MB
+        compression.type: snappy
+        linger.ms: 10
+        batch.size: 32768
+
+app:
+  kafka:
+    topics:
+      foods: foods
